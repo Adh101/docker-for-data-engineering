@@ -31,16 +31,19 @@ WHERE (DATE(lpep_pickup_datetime) >= DATE '2025-11-01' AND DATE(lpep_pickup_date
 ## Question 4. Which was the pick up day with the longest trip distance? Only consider trips with trip_distance less than 100 miles. 
 ### Solution:
 
-`SELECT MAX(trip_distance) AS max_distance,
+```
+SELECT MAX(trip_distance) AS max_distance,
 		lpep_pickup_datetime
 FROM trips_2025_11
 WHERE trip_distance < 100
 GROUP BY 2
-ORDER BY 1 DESC;`
+ORDER BY 1 DESC;
+```
 
 ## Question 5. Which was the pickup zone with the largest total_amount (sum of all trips) on November 18th, 2025?
 ### Solution:
-`WITH trips AS(
+```
+WITH trips AS(
 	SELECT *
 	FROM trips_2025_11
 	WHERE DATE(lpep_pickup_datetime) = DATE '2025-11-18'
@@ -53,11 +56,13 @@ FROM trips AS t
 	ON t."PULocationID" = z."LocationID"
 WHERE z."Zone" = "East Harlem North"
 GROUP BY 1
-ORDER BY 2 DESC;`
+ORDER BY 2 DESC;
+```
 
 ## Question 6. For the passengers picked up in the zone named "East Harlem North" in November 2025, which was the drop off zone that had the largest tip? 
 ### Solution:
-`WITH nov_trips AS (
+```
+WITH nov_trips AS (
     SELECT *
     FROM trips_2025_11
     WHERE DATE("lpep_pickup_datetime") >= DATE '2025-11-01'
@@ -71,4 +76,5 @@ JOIN taxi_zones AS z
     ON t."DOLocationID" = z."LocationID"
 WHERE z."Zone" = 'East Harlem North'
 GROUP BY 1
-ORDER BY 2 DESC;`
+ORDER BY 2 DESC;
+```
