@@ -21,10 +21,12 @@ To check the `pip` version:
 ## Question 3. For the trips in November 2025, how many trips had a trip_distance of less than or equal to 1 mile? 
 ### Solution:
 
-`SELECT COUNT(*)
+```
+SELECT COUNT(*)
 FROM trips_2025_11
 WHERE (DATE(lpep_pickup_datetime) >= DATE '2025-11-01' AND DATE(lpep_pickup_datetime) < DATE '2025-12-01')
-	AND trip_distance <= 1;`
+	AND trip_distance <= 1;
+```
 
 ## Question 4. Which was the pick up day with the longest trip distance? Only consider trips with trip_distance less than 100 miles. 
 ### Solution:
