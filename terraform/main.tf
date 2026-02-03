@@ -8,14 +8,14 @@ terraform {
 }
 
 provider "google" {
-  ##credentials = file("</workspaces/docker-for-data-engineering/terraform/keys/my-creds.json")
-  project = "de-zoomcamp-485615"
-  region  = "us-central1"
+  credentials = file(var.credentials)
+  project     = var.project_id
+  region      = var.gcs_location_region
 }
 
 resource "google_storage_bucket" "de_zoomcamp_485615_terraform_bucket" {
-  name          = "de-zoomcamp-485615-terraform-bucket"
-  location      = "US"
+  name          = var.gcs_bucket_name
+  location      = var.gcs_location
   force_destroy = true
 
   lifecycle_rule {
@@ -26,4 +26,9 @@ resource "google_storage_bucket" "de_zoomcamp_485615_terraform_bucket" {
       type = "AbortIncompleteMultipartUpload"
     }
   }
+}
+
+resource "google_bigquery_dataset" "demo_dataset" {
+  dataset_id = var.bq_dataset_name
+  location   = var.gcs_location
 }
