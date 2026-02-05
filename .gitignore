@@ -210,3 +210,5 @@ __marimo__/
 
 google-cloud-sdk.*
 google-cloud-sdk/
+.env_encoded
+*.json
